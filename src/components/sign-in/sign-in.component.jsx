@@ -24,16 +24,15 @@ class SignIn extends React.Component {
     render() {
         return(
             <div className='sign-in'>
-            <h2>I already have an account</h2>
+            <h2 className='title'>I already have an account</h2>
             <span>Sign in with your email and password</span>
             <form onSubmit={this.handleSubmit}>
-                <FormInput type='email' label='email' name='email' value={this.state.email} handleChange={this.handleChange} required/>
-                <FormInput type='password' label='password' name='password' value={this.state.password} handleChange={this.handleChange} required/>
+                <FormInput type='email' label='Email' name='email' value={this.state.email} handleChange={this.handleChange} required/>
+                <FormInput type='password' label='Password' name='password' value={this.state.password} handleChange={this.handleChange} required/>
                 <div className='buttons'>
                     <CustomButton type='submit'>Sign in</CustomButton>
                     <CustomButton isGoogleSignIn onClick={signInWithGoogle}>Sign in With Google</CustomButton>
                 </div>
-                
             </form>
 
             </div>
