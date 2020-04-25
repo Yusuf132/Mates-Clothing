@@ -6,3 +6,8 @@ export const addItem = item => ({
     type: CartActionTyles.ADD_ITEM,
     payload:item
 })
+
+export const clearItemFromCart = item => ({
+    type: CartActionTyles.CLEAR_ITEM_FROM_CART,
+    payload:item
+})
