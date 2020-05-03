@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import {selectCurrentUser} from './redux/user/user.selectors'
 import CheckoutPage from './pages/checkout/checkout.component';
 
-
 class App extends React.Component {
   
   unSubscribeFromAuth = null;
