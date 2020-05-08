@@ -5,9 +5,9 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInSignUpPage from './components/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import {auth, createUserProfileDocument} from './firebase/firebase.utils';
+// import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {connect} from 'react-redux';
-import {setCurrentUser} from './redux/user/user.actions'
+import {checkUserSession} from './redux/user/user.actions'
 import { createStructuredSelector } from 'reselect';
 import {selectCurrentUser} from './redux/user/user.selectors'
 import CheckoutPage from './pages/checkout/checkout.component';
@@ -16,23 +16,25 @@ class App extends React.Component {
   
   unSubscribeFromAuth = null;
   componentDidMount() {
-    console.log('propsfdsfdsf', this.props.setCurrentUser);
-    const {setCurrentUser} = this.props;
-    this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
+    const {checkUserSession} = this.props;
+   // console.log('propsfdsfdsf', this.props.setCurrentUser);
+   // const {setCurrentUser} = this.props;
+    // this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     userRef.onSnapshot(snapShot => {
         
-          setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data()
-            })
-        })
-      }
-      else {
-        setCurrentUser(userAuth);
-      }
-    })
+    //       setCurrentUser({
+    //           id: snapShot.id,
+    //           ...snapShot.data()
+    //         })
+    //     })
+    //   }
+    //   else {
+    //     setCurrentUser(userAuth);
+    //   }
+    // })
+    checkUserSession();
   }
   componentWillUnmount() {
     this.unSubscribeFromAuth();
@@ -57,7 +59,7 @@ const mapsToStateProps = createStructuredSelector({
 })
 const mapDispatchProps = dispatch => (
   {
-    setCurrentUser: user => dispatch(setCurrentUser(user))
+    checkUserSession: user => dispatch(checkUserSession(user))
   }
 )
 
